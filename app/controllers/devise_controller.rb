@@ -29,7 +29,9 @@ class DeviseController < Devise.parent_controller.constantize
   end
 
   def resource_params
-    params[resource_name]
+    # params[resource_name]
+    params[resource_name].nil? ? nil : params.require(resource_name).permit(:email, :password, :password_confirmation, :reset_password_token, :invitation_token, :name, :username, :phone)
+
   end
 
   # Returns a signed in resource from session (if one exists)
